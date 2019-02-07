@@ -47,7 +47,6 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute<bool>(builder: (context) => blocProviderAddTask),
           );
           _taskBloc.refresh();
-          Filter.byYears();
         },
       ),
       drawer: SideDrawer(),

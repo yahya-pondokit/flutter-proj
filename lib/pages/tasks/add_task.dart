@@ -85,18 +85,6 @@ class AddTaskScreen extends StatelessWidget {
               _showPriorityDialog(createTaskBloc, context);
             },
           ),
-          /*ListTile(
-            leading: Icon(Icons.label),
-            title: Text("Lables"),
-            subtitle: StreamBuilder(
-              stream: createTaskBloc.labelSelection,
-              initialData: "No Labels",
-              builder: (context, snapshot) => Text(snapshot.data),
-            ),
-            onTap: () {
-              _showLabelsDialog(context);
-            },
-          ),*/
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -159,23 +147,6 @@ class AddTaskScreen extends StatelessWidget {
               });
         });
   }
-
-  /*Future<Status> _showLabelsDialog(BuildContext context) async {
-    AddTaskBloc createTaskBloc = BlocProvider.of(context);
-    return showDialog<Status>(
-        context: context,
-        builder: (BuildContext context) {
-          return StreamBuilder(
-              stream: createTaskBloc.labels,
-              initialData: List<Label>(),
-              builder: (context, snapshot) {
-                return SimpleDialog(
-                  title: const Text('Select Labels'),
-                  children: buildLabels(createTaskBloc, context, snapshot.data),
-                );
-              });
-        });
-  }*/
 
   List<Widget> buildProjects(
     AddTaskBloc createTaskBloc,

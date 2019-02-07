@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/bloc/bloc_provider.dart';
 import 'package:flutter_app/pages/tasks/bloc/task_bloc.dart';
-import 'package:flutter_app/pages/tasks/task_db.dart';
-import 'package:flutter_app/pages/labels/label_db.dart';
 import 'package:flutter_app/pages/projects/project_db.dart';
 import 'package:flutter_app/pages/projects/project.dart';
 import 'package:flutter_app/pages/home/home_bloc.dart';
-import 'package:flutter_app/pages/labels/label_bloc.dart';
-import 'package:flutter_app/pages/labels/label_widget.dart';
 import 'package:flutter_app/pages/projects/project_bloc.dart';
 import 'package:flutter_app/pages/projects/project_widget.dart';
 import 'package:flutter_app/pages/home/about.dart';
-import 'package:flutter_app/main.dart';
 
 class SideDrawer extends StatelessWidget {
-  final TaskBloc _taskBloc = TaskBloc(TaskDB.get());
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +21,7 @@ class SideDrawer extends StatelessWidget {
             onTap: () {
               homeBloc.applyFilter("Semua", Filter.byYears());
               Navigator.pop(context);
-              // Navigator.push(
-              //     context, MaterialPageRoute(builder: (context) => MyApp()));
             },
-            // leading: Icon(Icons.calendar_today),
             title: Text("Semua Tugas",
                 style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)),
           ),
@@ -78,10 +69,6 @@ class SideDrawer extends StatelessWidget {
                       builder: (BuildContext context) => AboutPage()));
             },
           ),
-          // BlocProvider(
-          //   bloc: LabelBloc(LabelDB.get()),
-          //   child: LabelPage(),
-          // )
         ],
       ),
     );
