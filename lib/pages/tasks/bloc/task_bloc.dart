@@ -24,7 +24,7 @@ class TaskBloc implements BlocBase {
   Filter _lastFilterStatus;
 
   TaskBloc(this._taskDb) {
-    filterTodayTasks();
+    filterTasksForYears();
     _cmdController.stream.listen((_) {
       _updateTaskStream(_tasksList);
     });
