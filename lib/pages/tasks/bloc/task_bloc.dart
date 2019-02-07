@@ -76,6 +76,19 @@ class TaskBloc implements BlocBase {
     _lastFilterStatus = Filter.byNextWeek();
   }
 
+  void filterTasksForYears() {
+    var dateTime = DateTime.now();
+    var taskStartTime =
+        DateTime(dateTime.year, dateTime.month, dateTime.day - 7200, 23, 59)
+            .millisecondsSinceEpoch;
+    var taskEndTime =
+        DateTime(dateTime.year, dateTime.month, dateTime.day + 7200, 23, 59)
+            .millisecondsSinceEpoch;
+    // Read all next week tasks from database
+    _filterTask(taskStartTime, taskEndTime, TaskStatus.PENDING);
+    _lastFilterStatus = Filter.byYears();
+  }
+
   void filterByProject(int projectId) {
     _taskDb
         .getTasksByProject(projectId, status: TaskStatus.PENDING)
@@ -127,6 +140,10 @@ class TaskBloc implements BlocBase {
           filterTasksForNextWeek();
           break;
 
+        case FILTER_STATUS.BY_YEAR:
+          filterTasksForYears();
+          break;
+
         case FILTER_STATUS.BY_LABEL:
           filterByLabel(_lastFilterStatus.labelName);
           break;
@@ -148,7 +165,7 @@ class TaskBloc implements BlocBase {
   }
 }
 
-enum FILTER_STATUS { BY_TODAY, BY_WEEK, BY_PROJECT, BY_LABEL, BY_STATUS }
+enum FILTER_STATUS { BY_TODAY, BY_WEEK, BY_YEAR, BY_PROJECT, BY_LABEL, BY_STATUS }
 
 class Filter {
   String labelName;
@@ -162,6 +179,10 @@ class Filter {
 
   Filter.byNextWeek() {
     filterStatus = FILTER_STATUS.BY_WEEK;
+  }
+
+  Filter.byYears() {
+    filterStatus = FILTER_STATUS.BY_YEAR;
   }
 
   Filter.byProject(this.projectId) {

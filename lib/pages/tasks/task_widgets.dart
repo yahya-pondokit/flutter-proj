@@ -27,7 +27,14 @@ class TasksPage extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: list.length == 0
-          ? MessageInCenterWidget("Kosong")
+          ? Container(
+              padding: EdgeInsets.only(top: 60.0),
+              child: Column(
+                children: <Widget>[
+                  MessageInCenterWidget("Kosong"),
+                ],
+              ),
+            )
           : Container(
               child: ListView.builder(
                   itemCount: list.length,
@@ -47,22 +54,19 @@ class TasksPage extends StatelessWidget {
                             _tasksBloc.delete(taskID);
                             message = "Berhasil Dihapus!";
                           }
-                          SnackBar snackbar =
-                              SnackBar(content: Text(message));
+                          SnackBar snackbar = SnackBar(content: Text(message));
                           Scaffold.of(context).showSnackBar(snackbar);
                         },
                         background: Container(
                           color: Colors.red,
                           child: ListTile(
-                            leading:
-                                Icon(Icons.delete, color: Colors.white),
+                            leading: Icon(Icons.delete, color: Colors.white),
                           ),
                         ),
                         secondaryBackground: Container(
                           color: Colors.green,
                           child: ListTile(
-                            trailing:
-                                Icon(Icons.check, color: Colors.white),
+                            trailing: Icon(Icons.check, color: Colors.white),
                           ),
                         ),
                         child: TaskRow(list[index]));

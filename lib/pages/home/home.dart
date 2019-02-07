@@ -23,7 +23,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: StreamBuilder<String>(
-            initialData: 'Todo App',
+            initialData: 'Hari Ini',
             stream: homeBloc.title,
             builder: (context, snapshot) {
               return Text(snapshot.data);
@@ -47,6 +47,7 @@ class HomePage extends StatelessWidget {
             MaterialPageRoute<bool>(builder: (context) => blocProviderAddTask),
           );
           _taskBloc.refresh();
+          Filter.byYears();
         },
       ),
       drawer: SideDrawer(),
